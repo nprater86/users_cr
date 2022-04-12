@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename="../static/css/style.css") }}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="containerDelete">
+        <div class="contentDelete">
+            <div class="headerProfile">
+                <h1>Full Name: {{ user.first_name + " " + user.last_name }}</h1>
+                <a href="/users">Home</a>
+            </div>
+            <h1>Email: {{ user.email }}</h1>
+            <h1>Created On: {{ user.created_at.strftime("%B %d, %Y at %X") }}</h1>
+            <h1>Last Updated On: {{ user.updated_at.strftime("%B %d, %Y at %X") }}</h1>
+            <h1>Are you sure you want to delete the above user?</h1>
+            <h3 class="warning">(This cannot be undone!)</h3>
+            <form action="/delete" method="post">
+                <div class="radioDelete">
+                    <input type="hidden" name="which_user" value="{{ user.id }}">
+                    <div class="radioYes">
+                        <input type="radio" name="confirm" id="yes" value="yes">
+                        <label for="yes">Yes</label>
+                    </div>
+                    <div class="radioNo">
+                        <input type="radio" name="confirm" id="no" value="no">
+                        <label for="no">No</label>
+                    </div>
+                </div>
+                <button type="submit">Confirm</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
